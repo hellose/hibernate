@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

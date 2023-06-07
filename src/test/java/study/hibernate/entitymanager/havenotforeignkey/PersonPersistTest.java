@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
+import study.hibernate.entitymanager.havenotforeignkey.Person;
 
 /*
  * persist(managed 상태 객체) -> 아무런 일도 일어나지 않는다.

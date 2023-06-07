@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -76,7 +76,7 @@ public class PersonMergetTest {
 				System.out.println("mergedPerson == transientPerson: " + (mergedPerson == transientPerson)); // false
 				System.out.println("em.contains(mergedPerson): " + em.contains(mergedPerson)); // true
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -110,7 +110,7 @@ public class PersonMergetTest {
 				System.out.println("mergedPerson == transientPerson: " + (mergedPerson == transientPerson)); // false
 				System.out.println("em.contains(mergedPerson): " + em.contains(mergedPerson)); // true
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -149,7 +149,7 @@ public class PersonMergetTest {
 				System.out.println("mergedPerson: " + mergedPerson);
 				System.out.println("mergedPerson == findPerson: " + (mergedPerson == findPerson)); // true
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -192,7 +192,7 @@ public class PersonMergetTest {
 				
 				//insert
 				//update
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();

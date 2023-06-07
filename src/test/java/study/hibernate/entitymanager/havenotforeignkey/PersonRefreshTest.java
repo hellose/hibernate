@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -71,7 +71,7 @@ public class PersonRefreshTest {
 				// 모든 필드가 overwriting되어 find 시점의 값으로 돌아감
 				System.out.println("findPerson.getName(): " + findPerson.getName());
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -112,7 +112,7 @@ public class PersonRefreshTest {
 				em.refresh(findPerson);
 				System.out.println(findPerson.toString());
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();

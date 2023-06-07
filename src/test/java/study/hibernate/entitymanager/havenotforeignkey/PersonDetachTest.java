@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -65,7 +65,7 @@ public class PersonDetachTest {
 				System.out.println("===> merge person");
 				em.merge(person);
 
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -1,4 +1,4 @@
-package study.hibernate.persistenceContext.havenotforeignkey;
+package study.hibernate.entitymanager.havenotforeignkey;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -71,7 +71,7 @@ public class PersonRemoveTest {
 				System.out.println("===> remove person");
 				em.remove(findPerson);
 
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -113,7 +113,7 @@ public class PersonRemoveTest {
 				Person refindPerson = em.find(Person.class, 1);
 				System.out.println("refindPerson == null: " + (refindPerson == null)); // true
 
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -153,7 +153,7 @@ public class PersonRemoveTest {
 				em.persist(findPerson);
 				
 				// update 쿼리 나감 <- remove시 영속성 컨텍스트에서 제거되지만 스냅샷 정보는 보관중인 상태임을 확인 가능
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -189,7 +189,7 @@ public class PersonRemoveTest {
 				System.out.println("===> persist person");
 				em.persist(transientPerson); // remove 호출시 delete 스케줄링이 걸려있던 쿼리가 여기서 나감
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit(); // persist 호출시 만들어진 insert 쿼리가 여기서(flush)나감
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -227,7 +227,7 @@ public class PersonRemoveTest {
 				System.out.println("===> persist person");
 				em.persist(findPerson); // ok
 				
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit(); 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -261,7 +261,7 @@ public class PersonRemoveTest {
 				
 				//insert 쿼리
 				//delete 쿼리
-				System.out.println("===> commit person");
+				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
