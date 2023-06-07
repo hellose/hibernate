@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entitymanager.havenotforeignkey.Person;
+import study.hibernate.entity.Person;
 
 /*
  * persist(managed 상태 객체) -> 아무런 일도 일어나지 않는다.

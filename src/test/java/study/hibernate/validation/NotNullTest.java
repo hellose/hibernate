@@ -1,4 +1,4 @@
-package study.hibernate.entitymanager.havenotforeignkey;
+package study.hibernate.validation;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
@@ -7,17 +7,17 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entity.Person;
+import study.hibernate.entity.ValidationEntity;
 
-/*
- * refresh(managed 상태 객체) -> managed 상태 객체의 모든 필드는 DB에서 가져온 값들로 모두 overwriting된다.
- * managed 상태의 변경을 무시하거나, JPQL 사용시 활용
+/**
+ * NotNull 어노테이션 테스트
  */
-public class PersonRefreshTest {
+public class NotNullTest {
 
 	private EntityManagerFactory emf;
 	private EntityManager em;
@@ -31,11 +31,6 @@ public class PersonRefreshTest {
 				em = emf.createEntityManager();
 				tx = em.getTransaction();
 				tx.begin();
-
-				// pk 1 Person insert
-				Person person1 = Person.builder().id(1).name("DB에 들어있던 사람").build();
-				em.persist(person1);
-				
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -49,11 +44,12 @@ public class PersonRefreshTest {
 		});
 	}
 
-	/*
-	 * managed 상태 객체의 모든 필드는 DB에서 가져온 값들로 모두 overwriting된다. 또한 스냅샷이 갱신된다.
+	/**
+	 * persist시점에 notnull인 경우 - ok
 	 */
 	@Test
-	void test1() {
+	@DisplayName("persist시점에 notnull인 경우 ok")
+	void notnullAnnotaionTest1() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
@@ -61,17 +57,15 @@ public class PersonRefreshTest {
 				tx = em.getTransaction();
 				tx.begin();
 
-				System.out.println("===> find person");
-				Person findPerson = em.find(Person.class, 1);
-				
-				findPerson.setName("이름 변경");
-				
-				System.out.println("===> refresh person");
-				em.refresh(findPerson);
-				
-				// 모든 필드가 overwriting되어 find 시점의 값으로 돌아감
-				System.out.println("findPerson.getName(): " + findPerson.getName());
-				
+				ValidationEntity entity = ValidationEntity.builder().id(2).notNullCol("init").nullableFalseCol("init")
+						.build();
+
+				System.out.println("===> persist with notnull");
+				em.persist(entity);
+
+				System.out.println("===> flush");
+				em.flush();
+
 				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {
@@ -84,12 +78,13 @@ public class PersonRefreshTest {
 			}
 		});
 	}
-	
-	/*
-	 * JPQL 사용시 refresh를 사용하여 최신 DB 값으로 갱신
+
+	/**
+	 * persist시점에 null이지만 flush호출전 notnull로 초기화된 경우 - error
 	 */
 	@Test
-	void test2() {
+	@DisplayName("persist시점에 null이고 flush전에 notnull인 경우 error (flush시점 예외발생)")
+	void notnullAnnotaionTest2() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
@@ -97,22 +92,17 @@ public class PersonRefreshTest {
 				tx = em.getTransaction();
 				tx.begin();
 
-				System.out.println("===> find person");
-				Person findPerson = em.find(Person.class, 1);
-				System.out.println(findPerson.toString());
-				
-				// JPQL
-				System.out.println("===> update JPQL");
-				em.createQuery("update Person p set p.name = :name where p.id = :id")
-					.setParameter("id", 1)
-					.setParameter("name", "jpql로 이름 변경")
-					.executeUpdate();
-				System.out.println(findPerson.toString());
+				ValidationEntity entity = ValidationEntity.builder().id(1).notNullCol(null).nullableFalseCol("init")
+						.build();
 
-				System.out.println("===> refresh person");
-				em.refresh(findPerson);
-				System.out.println(findPerson.toString());
-				
+				System.out.println("===> persist with null");
+				em.persist(entity);
+
+				entity.setNotNullCol("init");
+
+				System.out.println("===> flush");
+				em.flush();
+
 				System.out.println("===> commit");
 				tx.commit();
 			} catch (Exception e) {

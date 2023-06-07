@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
+import study.hibernate.entity.Person;
 
 /*
  * remove(managed 상태 객체) -> removed 상태 객체로 변경됨 + 영속성 컨텍스트에서 없어짐

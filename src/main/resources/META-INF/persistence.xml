@@ -16,7 +16,7 @@
 			<!-- 옵션 -->
 			<!-- 콘솔에 쿼리 출력해줌 -->
 			<property name="hibernate.show_sql" value="false" />
-<!-- 			<property name="hibernate.show_sql" value="false" /> -->
+<!-- 			<property name="hibernate.show_sql" value="true" /> -->
 			<!-- 콘솔 쿼리 글자 포맷팅 -->
 			<property name="hibernate.format_sql" value="true" />
 			<!-- 쿼리에 해당하는 객체 출력해줌 -->
@@ -25,6 +25,15 @@
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<!-- CamelCase to UnderScore 맵핑 -->
 			<property name="hibernate.physical_naming_strategy" value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/>
+			
+			<!--
+			hibernate.check_nullability (e.g. true or false)
+			Enable nullability checking. Raises an exception if a property marked as not-null is null.
+			Default to false if Bean Validation is present in the classpath and Hibernate Annotations is used, true otherwise. 
+			 -->
+			<!-- Hibernate Validation -->
+<!-- 			<property name="hibernate.check_nullability" value="true"/> -->
+<!-- 			<property name="hibernate.check_nullability" value="false"/> -->
 		</properties>
 	</persistence-unit>
 	

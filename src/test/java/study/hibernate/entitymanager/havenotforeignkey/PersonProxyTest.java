@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
+import study.hibernate.entity.Person;
 
 /*
  * Hibernate 프록시 동작.

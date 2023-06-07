@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entitymanager.haveforeignkey.Member;
-import study.hibernate.entitymanager.haveforeignkey.Team;
+import study.hibernate.entity.Member;
+import study.hibernate.entity.Team;
 
 /**
  * Member persist시 fk team필드 확인 위주의 테스트 진행 (각 테스트에서 명시하지 않는한 @ManyToOne이 기본)<br>

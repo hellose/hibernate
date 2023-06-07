@@ -1,10 +1,8 @@
-package study.hibernate.entitymanager.haveforeignkey;
+package study.hibernate.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,18 +16,14 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = { "team" })
 @Entity
-public class Member {
+@ToString
+public class Person {
 
 	@Id
 	private Integer id;
 
 	@Column(nullable = true)
 	private String name;
-
-	@ManyToOne
-	@JoinColumn(name = "team_id")
-	private Team team;
 
 }

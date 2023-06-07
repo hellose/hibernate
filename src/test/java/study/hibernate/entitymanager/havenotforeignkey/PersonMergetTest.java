@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
+import study.hibernate.entity.Person;
 
 /*
  * merge(new/transient 상태 객체)
