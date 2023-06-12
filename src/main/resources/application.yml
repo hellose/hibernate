@@ -1,3 +1,10 @@
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+    study:
+      hibernate: debug
 server:
   port: 8081
 spring:
@@ -5,7 +12,39 @@ spring:
     activate: 
       on-profile: local  
   datasource:
-    url: jdbc:h2:~/hibernate
+#    url: jdbc:h2:~/hibernate
+    url: jdbc:h2:~/hibernatetest
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /console
+  thymeleaf:
+    cache: false
+  devtools.livereload.enabled: true
+
+---
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+    study:
+      hibernate: debug
+server:
+  port: 8081
+spring:
+  config:
+    activate: 
+      on-profile: test  
+  datasource:
+    url: jdbc:h2:~/hibernatetest
     username: sa
     password:
   jpa:
@@ -13,12 +52,3 @@ spring:
     hibernate:
       ddl-auto: create
     properties.hibernate.format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  thymeleaf:
-    cache: false
-  devtools.livereload.enabled: true
-
-  

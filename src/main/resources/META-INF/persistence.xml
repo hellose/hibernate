@@ -10,13 +10,13 @@
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/hibernate" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost/~/hibernatetest" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
 
 			<!-- 옵션 -->
 			<!-- 콘솔에 쿼리 출력해줌 -->
-			<property name="hibernate.show_sql" value="false" />
-<!-- 			<property name="hibernate.show_sql" value="true" /> -->
+<!-- 			<property name="hibernate.show_sql" value="false" /> -->
+			<property name="hibernate.show_sql" value="true" />
 			<!-- 콘솔 쿼리 글자 포맷팅 -->
 			<property name="hibernate.format_sql" value="true" />
 			<!-- 쿼리에 해당하는 객체 출력해줌 -->
@@ -34,6 +34,9 @@
 			<!-- Hibernate Validation -->
 <!-- 			<property name="hibernate.check_nullability" value="true"/> -->
 <!-- 			<property name="hibernate.check_nullability" value="false"/> -->
+
+			<!-- default: auto -->
+<!-- 			<property name="org.hibernate.flushMode" value="commit"/> -->
 		</properties>
 	</persistence-unit>
 	
