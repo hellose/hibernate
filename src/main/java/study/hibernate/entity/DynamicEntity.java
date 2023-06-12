@@ -22,7 +22,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DynamicInsertEntity {
+public class DynamicEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
