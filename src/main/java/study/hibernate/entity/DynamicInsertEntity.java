@@ -22,20 +22,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DynamicEntity {
+public class DynamicInsertEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 
-//	@NotNull
-	@Column(nullable = false)
-	private String notNullString;
-	
-	@Column(nullable = true)
-	private String nullableString;
+	@ColumnDefault(value = "'nullableColumnDefault'")
+	private String defNullable;
 
-	@ColumnDefault("'default'")
-	private String defaultString;
+	@ColumnDefault(value = "'notNullColumnDefault'")
+	@Column(nullable = false)
+	private String defNotNull;
+
+	private String nullable;
 
 }
