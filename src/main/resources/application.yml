@@ -24,7 +24,7 @@ spring:
   h2:
     console:
       enabled: true
-      path: /console
+      path: /h2
   thymeleaf:
     cache: false
   devtools.livereload.enabled: true
