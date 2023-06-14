@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entity.DynamicUpdateEntity;
+import study.hibernate.entity.dynamic.DynamicUpdateEntity;
 
 /*
  * @DynamicUpdate 어노테이션 테스트

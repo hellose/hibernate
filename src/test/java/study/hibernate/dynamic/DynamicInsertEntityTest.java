@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entity.DynamicInsertEntity;
+import study.hibernate.entity.dynamic.DynamicInsertEntity;
 
 public class DynamicInsertEntityTest {
 

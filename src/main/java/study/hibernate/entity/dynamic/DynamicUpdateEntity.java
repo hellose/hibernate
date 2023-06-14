@@ -1,4 +1,4 @@
-package study.hibernate.entity;
+package study.hibernate.entity.dynamic;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

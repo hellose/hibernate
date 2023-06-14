@@ -1,4 +1,4 @@
-package study.hibernate.entity;
+package study.hibernate.entity.lifecycle;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

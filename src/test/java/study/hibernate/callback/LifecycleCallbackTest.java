@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import lombok.extern.slf4j.Slf4j;
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entity.CallbackEntity;
+import study.hibernate.entity.lifecycle.CallbackEntity;
 
 @Slf4j
 public class LifecycleCallbackTest {

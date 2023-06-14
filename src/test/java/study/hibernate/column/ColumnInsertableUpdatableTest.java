@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import lombok.extern.slf4j.Slf4j;
 import study.hibernate.ddlauto.MyHibernate;
 import study.hibernate.ddlauto.MyHibernate.DdlType;
-import study.hibernate.entity.ColumnInsertUpdatableEntity;
+import study.hibernate.entity.column.ColumnInsertUpdatableEntity;
 
 @Slf4j
 public class ColumnInsertableUpdatableTest {
