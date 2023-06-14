@@ -1,4 +1,4 @@
-package study.hibernate.entity.audit;
+package study.hibernate.entity.audit.version4and5;
 
 import java.time.LocalDateTime;
 
@@ -14,15 +14,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+/*
+ * Custom Entity Listener 사용
+ */
 @Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EntityListeners(AuditVersion2Listener.class)
-public class AuditVersion2 {
+@EntityListeners(DateAuditableListener.class)
+@Slf4j
+public class AuditVersion4 implements DateAuditable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -35,4 +40,20 @@ public class AuditVersion2 {
 
 	@Column(nullable = false)
 	private LocalDateTime updatedTime;
+
+	@Override
+	public void setCreatedTime() {
+		log.debug("===> AuditVersion4.setCreatedTime()");
+		LocalDateTime now = LocalDateTime.now();
+		this.createdTime = now;
+		this.updatedTime = now;
+	}
+
+	@Override
+	public void setUpdatedTime() {
+		log.debug("===> AuditVersion4.setUpdatedTime()");
+		LocalDateTime now = LocalDateTime.now();
+		this.updatedTime = now;
+	}
+
 }
