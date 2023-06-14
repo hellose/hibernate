@@ -31,6 +31,12 @@ public class LifecycleCallbackTest {
 				tx = em.getTransaction();
 				tx.begin();
 
+				CallbackEntity entity = CallbackEntity.builder()
+														.id(1)
+														.col("beforeEach")
+														.build();
+				em.persist(entity);
+				
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -53,30 +59,28 @@ public class LifecycleCallbackTest {
 		emf = null;
 	}
 
-	/*
-	 * @PrePersist, @PostPersist
-	 */
+	// persist -> @PrePersist, @PostPersist
 	@Test
-	void test1() {
+	void persist() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
 				em = emf.createEntityManager();
 				tx = em.getTransaction();
 				tx.begin();
-				
+
 				CallbackEntity entity = CallbackEntity.builder()
-														.id(1)
+														.id(2)
 														.build();
-				
+
 				log.debug("===> persist 전");
 				em.persist(entity);
 				log.debug("===> persist 후");
-				
+
 				log.debug("===> flush 전");
 				em.flush();
 				log.debug("===> flush 후");
-				
+
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -88,40 +92,29 @@ public class LifecycleCallbackTest {
 			}
 		});
 	}
-	
-	/*
-	 * @PreUpdate, @PostUpdate
-	 */
+
+	// merge시 DB에 row가 존재하지 않는 경우 -> @PrePersist, @PostPersist
 	@Test
-	void test2() {
+	void mergeWhenDbDoesntHaveRow() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
 				em = emf.createEntityManager();
 				tx = em.getTransaction();
 				tx.begin();
-				
+
 				CallbackEntity entity = CallbackEntity.builder()
-														.id(1)
+														.id(2)
 														.build();
-				
-				log.debug("===> persist 전");
-				em.persist(entity);
-				log.debug("===> persist 후");
-				
+
+				log.debug("===> merge 전");
+				em.merge(entity);
+				log.debug("===> merge 후");
+
 				log.debug("===> flush 전");
 				em.flush();
 				log.debug("===> flush 후");
-				
-				log.debug("===> 테스트에서 필드 값 변경");
-				entity.setCol("테스트에서 필드 값 변경");
-				
-				log.debug("===> flush 전");
-				em.flush();
-				log.debug("===> flush 후");
-				
-				entity.setCol("preUpdate에서 필드 값 변경");
-				
+
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -133,30 +126,86 @@ public class LifecycleCallbackTest {
 			}
 		});
 	}
-	
-	/*
-	 * insert, update 쿼리를 한번에 flush하는 경우: @PreUpdate -> insert -> @PostPersist -> update -> @PostUpdate
-	 * (@PreUpdate는 모든 쿼리 발생 전 호출됨)
-	 */
+
+	// 필드 변경 후 flush -> @PreUpdate, @PostUpdate
 	@Test
-	void test3() {
+	void managedEntityFieldUpdate() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
 				em = emf.createEntityManager();
 				tx = em.getTransaction();
 				tx.begin();
-				
+
 				CallbackEntity entity = CallbackEntity.builder()
-						.id(1)
-						.build();
-				
+														.id(2)
+														.build();
+
+				log.debug("===> persist 전");
 				em.persist(entity);
+				log.debug("===> persist 후");
+
+				log.debug("===> flush 전");
+				em.flush();
+				log.debug("===> flush 후");
+				
 				entity.setCol("update1");
 				
-				log.debug("===> flush 전");
-				em.flush();
-				log.debug("===> flush 후");
+				log.debug("===> commit 전");
+				tx.commit();
+				log.debug("===> commit 후");
+			} catch (Exception e) {
+				e.printStackTrace();
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				em.close();
+				emf.close();
+			}
+		});
+	}
+
+	// DB에서 엔티티 조회하여 영속성 컨텍스트에 로드되는 경우 -> @PostLoad
+	@Test
+	void findEntity() {
+		assertDoesNotThrow(() -> {
+			try {
+				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
+				em = emf.createEntityManager();
+				tx = em.getTransaction();
+				tx.begin();
+				
+				log.debug("===> find 전");
+				em.find(CallbackEntity.class, 1);
+				log.debug("===> find 후");
+				
+				tx.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				em.close();
+				emf.close();
+			}
+		});
+	}
+	
+	// 엔티티 삭제 -> @PreRemove, @PostRemove
+	@Test
+	void remove() {
+		assertDoesNotThrow(() -> {
+			try {
+				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
+				em = emf.createEntityManager();
+				tx = em.getTransaction();
+				tx.begin();
+				
+				CallbackEntity find = em.find(CallbackEntity.class, 1);
+				
+				log.debug("===> remove 전");
+				em.remove(find);
+				log.debug("===> remove 후");
 				
 				log.debug("===> flush 전");
 				em.flush();
@@ -173,6 +222,5 @@ public class LifecycleCallbackTest {
 			}
 		});
 	}
-	
 
 }
