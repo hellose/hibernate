@@ -151,8 +151,10 @@ public class PersonRefreshTest {
 
 				Person person2 = Person.builder().id(2).name("person2").build();
 				em.persist(person2);
+
+				// refresh시 flush는 일어나지 않으므로
+				// -> insert쿼리가 flush되지 않은 상태에서 refresh호출시 바로 select쿼리가 나가 예외발생함
 				
-				//insert쿼리가 flush되지 않은 상태에서 refresh호출시 바로 select쿼리가 나가 예외발생함
 //				em.flush(); //주석해제시 예외발생안함
 				em.refresh(person2);
 				
