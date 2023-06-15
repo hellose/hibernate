@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class PersonRefreshTest {
 	private EntityTransaction tx;
 
 	@BeforeEach
-	void init() {
+	void beforeEach() {
 		assertDoesNotThrow(() -> {
 			try {
 				emf = MyHibernate.createEntityManagerFactory(DdlType.CREATE);
@@ -44,9 +45,19 @@ public class PersonRefreshTest {
 			} finally {
 				em.close();
 				emf.close();
+				tx = null;
+				em = null;
+				emf = null;
 				System.out.println("===> beforeEach");
 			}
 		});
+	}
+
+	@AfterEach
+	void afterEach() {
+		tx = null;
+		em = null;
+		emf = null;
 	}
 
 	/*
@@ -114,6 +125,37 @@ public class PersonRefreshTest {
 				System.out.println(findPerson.toString());
 				
 				System.out.println("===> commit");
+				tx.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				tx.rollback();
+				throw new RuntimeException(e);
+			} finally {
+				em.close();
+				emf.close();
+			}
+		});
+	}
+	
+	/*
+	 * DB에서 다시 로딩시키는 refresh를 사용하기 위해서는 flush가 되어 DB에 엔티티가 존재하는 상태여야한다.
+	 */
+	@Test
+	void test3() {
+		assertDoesNotThrow(() -> {
+			try {
+				emf = MyHibernate.createEntityManagerFactory(DdlType.UPDATE);
+				em = emf.createEntityManager();
+				tx = em.getTransaction();
+				tx.begin();
+
+				Person person2 = Person.builder().id(2).name("person2").build();
+				em.persist(person2);
+				
+				//insert쿼리가 flush되지 않은 상태에서 refresh호출시 바로 select쿼리가 나가 예외발생함
+//				em.flush(); //주석해제시 예외발생안함
+				em.refresh(person2);
+				
 				tx.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
