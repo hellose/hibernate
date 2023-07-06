@@ -12,10 +12,11 @@
         </encoder>
     </appender>     
         
-<!--     <logger name="org.hibernate" level="trace" /> -->
+<!--     <logger name="org.hibernate" level="debug" /> -->
+    <logger name="org.hibernate.sql" level="debug" />
 <!--     <logger name="org.hibernate.type" level="trace" />     -->
     <logger name="org.hibernate.type.descriptor.sql" level="trace" />    
-    <logger name="org.springframework" level="info" />
+<!--     <logger name="org.springframework" level="info" /> -->
     <logger name="study.hibernate" level="trace" />
     
     <root level="info">
