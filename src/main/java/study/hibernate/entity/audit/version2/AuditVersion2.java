@@ -3,7 +3,6 @@ package study.hibernate.entity.audit.version2;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ import lombok.Setter;
 /*
  * Hibernate에서 제공하는 @CreationTimestamp, @UpdateTimestamp 사용
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

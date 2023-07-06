@@ -1,7 +1,6 @@
 package study.hibernate.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +13,7 @@ import lombok.Setter;
 /**
  * NotNull VS Column(nullable=false)
  */
-@Entity
+//@Entity
 @Setter
 @Getter
 @Builder

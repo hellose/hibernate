@@ -2,7 +2,6 @@ package study.hibernate.entity.audit.version4and5;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 /*
  * 추상 클래스 및 @MappedSuperclass로 변경
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

@@ -3,7 +3,6 @@ package study.hibernate.entity;
 import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,15 +21,16 @@ import lombok.Setter;
 /*
  * 자기 테이블의 pk를 참조하는 fk가 자기 테이블에 있는 경우
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@SequenceGenerator(name = "FolderGenerator", sequenceName = "folder_seq")
 public class Folder {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FolderGenerator")
 	private Integer id;
 
 	@Column(nullable = true)
@@ -47,4 +48,17 @@ public class Folder {
 	@OneToMany(mappedBy = "parentFolder")
 	private List<Folder> children;
 
+	public Folder(Integer id) {
+		this.id = id;
+	}
+
+	public Folder(String name) {
+		this.name = name;
+	}
+
+	public Folder(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	
 }

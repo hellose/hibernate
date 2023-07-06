@@ -1,6 +1,5 @@
 package study.hibernate.entity.audit.version6;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * Multiple Entity Listener 테스트
  * 호출 순서: FirstListener -> SecondListener -> AuditVersion6
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

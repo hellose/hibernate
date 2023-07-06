@@ -3,7 +3,6 @@ package study.hibernate.entity.audit.version1;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +18,7 @@ import lombok.Setter;
 /*
  * @PrePersist, @PostUpdate를 통해 직접 구현
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

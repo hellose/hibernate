@@ -3,7 +3,6 @@ package study.hibernate.entity.audit.version3;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +22,7 @@ import lombok.Setter;
  * @CreatedDate, @LastModifiedDate 어노테이션이 붙은 필드는 Spring Data JPA에서 제공하는 AuditingEntityListener를 통해 auditing가능
  * AuditingEntityListener가 동작하기 위해서는 Spring Data JPA 엔티티 Auditing기능 활성화에 해당하는 @EnableJpaAuditing 활성화 필요
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

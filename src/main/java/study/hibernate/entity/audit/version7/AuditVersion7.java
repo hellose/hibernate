@@ -1,6 +1,5 @@
 package study.hibernate.entity.audit.version7;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +18,7 @@ import lombok.Setter;
 /*
  * JpaAuditingConfig 추가 설정 후 @CreatedBy, @LastModifiedBy 사용
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Builder

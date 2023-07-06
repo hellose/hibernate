@@ -1,6 +1,5 @@
 package study.hibernate.entity.lifecycle;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
@@ -17,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-@Entity
+//@Entity
 @Getter
 @Setter
 @NoArgsConstructor
