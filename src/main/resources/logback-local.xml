@@ -2,7 +2,8 @@
 <configuration>    
 
 
-    <property name="consolePattern" value="%-5level %d{yyyy-MM-dd HH:mm:ss}[%thread] %logger[%method:%line] - %msg%n"/>
+<!--     <property name="consolePattern" value="%-5level %d{yyyy-MM-dd HH:mm:ss}[%thread] %logger[%method:%line] - %msg%n"/> -->
+    <property name="consolePattern" value="%-5level %d{yyyy-MM-dd HH:mm:ss}[%thread] %logger - %msg%n"/>
 
     <!-- Log Appender Module -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>

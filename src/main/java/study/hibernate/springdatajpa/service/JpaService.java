@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,7 @@ import study.hibernate.springdatajpa.repository.TeamRepository;
 /**
  * Spring Data JPA 동작 테스트
  */
-@Service
+//@Service
 @Slf4j
 public class JpaService {
 

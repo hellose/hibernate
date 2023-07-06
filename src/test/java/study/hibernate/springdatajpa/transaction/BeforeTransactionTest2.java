@@ -12,17 +12,15 @@ import org.springframework.test.context.transaction.BeforeTransaction;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
+import study.hibernate.entity.SeqEntity;
 import study.hibernate.springdatajpa.repository.SeqEntityRepository;
 
-/*
- * @BeforeTransaction -> @BeforeEach -> @Test -> @AfterEach -> @BeforeTransaction -> @BeforeEach -> @Test -> @AfterEach
- */
 @SpringBootTest
 @ActiveProfiles("test")
 @Transactional
 @TestInstance(Lifecycle.PER_CLASS)
 @Slf4j
-public class BeforeTransactionTest {
+public class BeforeTransactionTest2 {
 
 	@Autowired
 	private SeqEntityRepository repo;
@@ -37,9 +35,19 @@ public class BeforeTransactionTest {
 		log.debug("===> afterEach");
 	}
 
+	// BeforeTransaction은 @Rollback(false) 설정해도 적용안됨
 	@BeforeTransaction
 	void beforeTransaction() {
 		log.debug("===> beforeTransaction");
+
+		SeqEntity en = new SeqEntity();
+		SeqEntity saved = repo.save(en);
+		log.debug("===> save");
+		Integer i = saved.getId();
+
+		// select 쿼리나감 -> 내부에서는 transactional로 처리되지 않음
+		log.debug("===> find");
+		repo.findById(i);
 	}
 
 	@Test

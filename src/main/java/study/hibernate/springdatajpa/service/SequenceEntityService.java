@@ -2,7 +2,6 @@ package study.hibernate.springdatajpa.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import study.hibernate.entity.SeqEntity;
 import study.hibernate.springdatajpa.repository.SeqEntityRepository;
 
-@Service
+//@Service
 @RequiredArgsConstructor
 @Slf4j
 public class SequenceEntityService {
